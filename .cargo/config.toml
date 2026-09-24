@@ -1,0 +1,19 @@
+# 静态链接 MSVC CRT（应用本体 + bridge + speedpatch 全部适用）。
+#
+# Rust 在 *-pc-windows-msvc 上默认动态链接 CRT，于是每个产物都会导入
+# VCRUNTIME140.dll（x64 还多一个 VCRUNTIME140_1.dll）。这些不是 Windows 组件，
+# 而是随 Visual C++ 2015-2022 可再发行包安装的 —— 在从没装过它的机器上，进程
+# 会在加载阶段就失败：进不到 main()，日志文件一个字节都不会写，用户只看到闪退。
+# 静态链接可以彻底去掉这个依赖。
+#
+# 注意：环境变量 RUSTFLAGS 的优先级高于本文件，CI 上不要设置它。
+#
+# Cargo 从当前工作目录向上查找本文件，所以仓库根这一份同时覆盖：
+#   - 仓库根执行的 `npx tauri build` / `cargo build`（CI 与本地）
+#   - src-tauri 里 build.rs 发起的嵌套 bridge 构建
+
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.i686-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

@@ -28,6 +28,9 @@
 #pragma comment(lib, "winmm.lib")
 #pragma data_seg("shared")
 static std::atomic<double> factor = 1.0;
+// 安装失败的 hook 数。放在共享段里 —— 注入到游戏里的那份 DLL 记录到的失败
+// 也能被 bridge 进程读到（两者映射同一个 DLL 镜像），从而写进 bridge 的日志。
+static std::atomic<unsigned> hookFailures = 0;
 #pragma data_seg()
 #pragma comment(linker, "/section:shared,RWS")
 
@@ -46,6 +49,11 @@ SPEEDPATCH_API void SP_SetSpeed(double factor_)
 SPEEDPATCH_API double SP_GetSpeed()
 {
     return factor.load();
+}
+
+SPEEDPATCH_API unsigned SP_GetHookFailures()
+{
+    return hookFailures.load();
 }
 
 void SP_Install()
@@ -549,19 +557,40 @@ inline VOID shouldUpdateAll()
     shouldUpdateGetSystemTimePreciseAsFileTime = true;
 }
 
-template <typename S, typename T>
-inline VOID MH_HOOK(S* pTarget, S* pDetour, T** ppOriginal)
+// 记录 hook 安装失败。DllMain 运行在加载器锁里：既不能弹 MessageBox（模态框会把
+// 目标进程和 bridge 一起卡死），也不能写文件（同样在加载器锁里）。输出到调试器，
+// 并累加到共享计数器，由 bridge 读出来写进自己的日志。
+static void ReportHookFailure(const char* stage, MH_STATUS status)
 {
+    char buf[160];
+    wsprintfA(buf, "[speedpatch] %s failed (status %d) — hook skipped\n", stage, (int)status);
+    OutputDebugStringA(buf);
+    hookFailures.fetch_add(1);
+}
 
-    if (MH_CreateHook(reinterpret_cast<LPVOID> (pTarget), reinterpret_cast<LPVOID> (pDetour), reinterpret_cast<LPVOID*> (ppOriginal)) != MH_OK)
+template <typename S, typename T>
+inline BOOL MH_HOOK(S* pTarget, S* pDetour, T** ppOriginal)
+{
+    MH_STATUS status = MH_CreateHook(reinterpret_cast<LPVOID> (pTarget), reinterpret_cast<LPVOID> (pDetour), reinterpret_cast<LPVOID*> (ppOriginal));
+    if (status != MH_OK)
     {
-        MessageBoxW(NULL, L"MH装载失败", L"DLL", MB_OK);
+        // 这一步失败时目标函数一个字节都没动，detour 不可能被调用，
+        // ppOriginal 也保持 MinHook 写下的值 —— 不要去改它。
+        ReportHookFailure("MH_CreateHook", status);
+        return FALSE;
     }
 
-    if (MH_EnableHook(reinterpret_cast<LPVOID> (pTarget)) != MH_OK)
+    status = MH_EnableHook(reinterpret_cast<LPVOID> (pTarget));
+    if (status != MH_OK)
     {
-        MessageBoxW(NULL, L"MH装载失败", L"DLL", MB_OK);
+        // MinHook 在写入前会先 VirtualProtect 校验，失败时目标函数保持原样。
+        // 所以这里故意不删 hook：留着已建好的 trampoline 比删掉更安全 ——
+        // 即使目标真被改了一半，trampoline 仍指向正确的原始代码。
+        ReportHookFailure("MH_EnableHook", status);
+        return FALSE;
     }
+
+    return TRUE;
 }
 
 template <typename T>
@@ -579,7 +608,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 
         if (MH_Initialize() != MH_OK)
         {
-            MessageBoxW(NULL, L"MH装载失败", L"DLL", MB_OK);
+            // 不能弹 MessageBox —— DllMain 持有加载器锁。返回 FALSE 让这次加载干净失败。
+            OutputDebugStringA("[speedpatch] MH_Initialize failed — DLL not loaded\n");
             return FALSE;
         }
         SP_Install();
@@ -690,8 +720,9 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
             std::unique_lock<std::shared_mutex> lock(mutex);
             if (MH_Uninitialize() != MH_OK)
             {
-                MessageBoxW(NULL, L"DLL卸载失败", L"DLL", MB_OK);
-                return FALSE;
+                // 进程正在退出，同样不能弹模态框；DllMain 在 DETACH 下的返回值无意义，
+                // 所以这里也不能 return —— 下面的 SP_Uninstall() 必须照常执行。
+                OutputDebugStringA("[speedpatch] MH_Uninitialize failed\n");
             }
         }
         SP_Uninstall();
