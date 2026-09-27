@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center"> OpenSpeedy </h1>
 
 <p align="center">
@@ -170,6 +164,12 @@ OpenSpeedy изменяет скорость игры, перехватывая 
 - Чрезмерное ускорение может вызвать сбои физического движка или падение игры
 - Не рекомендуется для использования в соревновательных онлайн-играх
 - ПО с открытым исходным кодом без цифровой подписи может вызывать ложные срабатывания антивирусов
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 Обратная связь
 Если у вас возникли проблемы, пожалуйста, обращайтесь:

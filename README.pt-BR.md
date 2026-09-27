@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-    <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center">OpenSpeedy</h1>
 
 <p align="center">
@@ -154,6 +148,12 @@ O OpenSpeedy ajusta a velocidade do jogo fazendo hook nas seguintes funções de
 - Velocidade excessiva pode causar falhas no motor físico ou travamentos
 - Não recomendado para uso em jogos competitivos online
 - Software open-source sem assinatura digital pode gerar falsos positivos em antivírus
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+    <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 Feedback
 

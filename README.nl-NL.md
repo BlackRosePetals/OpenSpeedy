@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center"> OpenSpeedy </h1>
 
 <p align="center">
@@ -170,6 +164,12 @@ OpenSpeedy past de spelsnelheid aan door de volgende Windows-systeemtijdfuncties
 - Overmatige snelheid kan fouten in de physics-engine of crashes veroorzaken
 - Niet aanbevolen voor gebruik in competitieve online games
 - Open-sourcesoftware zonder digitale handtekeningen kan valse meldingen van antivirussoftware veroorzaken
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 Feedback
 Als u problemen ondervindt, neem dan contact op via:

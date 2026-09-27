@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center"> OpenSpeedy </h1>
 
 <p align="center">
@@ -170,6 +164,12 @@ OpenSpeedy 透過 Hook 以下 Windows 系統時間函式來實現遊戲速度調
 - 過度加速可能導致遊戲物理引擎異常或崩潰
 - 不建議在競技類線上遊戲中使用
 - 開源產品不帶數位簽章，可能被防毒軟體誤報
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 意見回饋
 如果在使用過程中遇到任何問題，歡迎透過以下方式回饋：

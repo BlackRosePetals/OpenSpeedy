@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center"> OpenSpeedy </h1>
 
 <p align="center">
@@ -170,6 +164,12 @@ OpenSpeedy는 다음 Windows 시스템 시간 함수를 후킹하여 게임 속�
 - 과도한 가속은 게임 물리 엔진의 오류나 충돌을 초래할 수 있습니다
 - 경쟁 온라인 게임에서는 사용을 권장하지 않습니다
 - 디지털 서명이 없는 오픈소스 소프트웨어는 바이러스 백신의 오탐지를 유발할 수 있습니다
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 피드백
 문제가 발생하면 다음 방법으로 문의해 주세요:

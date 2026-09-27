@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center"> OpenSpeedy </h1>
 
 <p align="center">
@@ -170,6 +164,12 @@ OpenSpeedy は以下の Windows システム時間関数をフックすること
 - 過度な加速はゲームの物理エンジンの異常やクラッシュを引き起こす可能性があります
 - 競技系オンラインゲームでの使用は推奨しません
 - デジタル署名のないオープンソースソフトウェアは、アンチウイルスソフトに誤検出される可能性があります
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 フィードバック
 問題が発生した場合は、以下の方法でご連絡ください：

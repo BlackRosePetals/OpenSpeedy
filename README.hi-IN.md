@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="https://www.365tz96752.com/?r=RWQVZD">
-  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
-  </a>
-</p>
-
 <h1 align="center"> OpenSpeedy </h1>
 
 <p align="center">
@@ -170,6 +164,12 @@ OpenSpeedy निम्नलिखित Windows सिस्टम समय �
 - अत्यधिक गति गेम फ़िज़िक्स इंजन में गड़बड़ी या क्रैश का कारण बन सकती है
 - प्रतिस्पर्धी ऑनलाइन गेम में उपयोग की अनुशंसा नहीं की जाती
 - डिजिटल हस्ताक्षर के बिना ओपन-सोर्स सॉफ़्टवेयर एंटीवायरस से गलत चेतावनियाँ उत्पन्न कर सकता है
+
+<p align="center">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
+  <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
+  </a>
+</p>
 
 # 🔄 फ़ीडबैक
 यदि आपको कोई समस्या आती है, तो कृपया इन माध्यमों से संपर्क करें:
