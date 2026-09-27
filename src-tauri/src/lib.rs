@@ -1,5 +1,6 @@
 pub mod applog;
 mod bridge_client;
+mod bridge_job;
 mod process_enumerator;
 mod system_stats;
 
@@ -60,8 +61,22 @@ fn ensure_bridges() {
             .stderr(stderr)
             .spawn()
         {
-            Ok(child) => {
+            Ok(mut child) => {
                 applog::info("bridge", format!("spawned {} as pid {}", name, child.id()));
+                // Join the cleanup job right away: the gap between spawn() and
+                // this call is the only window in which a bridge could outlive a
+                // force-killed app. Checked for liveness first — a bridge that
+                // died on startup cannot be orphaned, and reporting "not in the
+                // job" for it would mislead whoever reads the log.
+                match child.try_wait() {
+                    Ok(Some(status)) => applog::warn("bridge", format!(
+                        "{name} (pid {}) exited immediately ({status}) — not added to the cleanup job",
+                        child.id()
+                    )),
+                    _ => {
+                        bridge_job::assign(&child, name);
+                    }
+                }
                 children.push(child);
             }
             Err(e) => applog::error("bridge", format!("failed to spawn {}: {e}", path.display())),
@@ -91,6 +106,14 @@ fn ensure_bridges() {
 fn shutdown_bridges() {
     // Kill bridge processes immediately — graceful SHUTDOWN via pipe can
     // block if the bridge is busy processing a long-running command.
+    //
+    // This covers orderly exits only. A force-kill or a crash runs none of this,
+    // and is handled by the `bridge_job` kill-on-close job instead. The job
+    // handle is deliberately not closed here: `BRIDGE_JOB` is a `OnceLock`, so
+    // closing would be irreversible and leave a dangling handle behind for any
+    // later `ensure_bridges` to hand to `AssignProcessToJobObject`. There is
+    // nothing to gain either — process exit closes it, which is exactly the
+    // signal that tears the bridges down.
     if let Ok(mut children) = BRIDGE_CHILDREN.lock() {
         for mut child in children.drain(..) {
             applog::info("bridge", format!("killing bridge pid {}", child.id()));
