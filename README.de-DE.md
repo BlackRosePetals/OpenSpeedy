@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://ref.365tz87989.com/?r=RWQVZD">
+  <a href="https://www.365tz96752.com/?r=RWQVZD">
   <img src="https://github.com/user-attachments/assets/e50ac3de-a1a8-4185-b081-c9f22ea126fe" />
   </a>
 </p>
