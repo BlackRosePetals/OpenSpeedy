@@ -26,6 +26,7 @@ export interface SettingsState {
   theme: "light" | "dark";
   autoStart: boolean;
   alwaysOnTop: boolean;
+  hideToTray: boolean;
   language: "zh-CN" | "zh-TW" | "ja-JP" | "ko-KR" | "de-DE" | "fr-FR" | "en-US" | "ru-RU" | "hi-IN" | "nl-NL" | "pt-BR" | "es-ES";
   speed: number;
 }
@@ -56,6 +57,9 @@ export const DEFAULTS: SettingsState = {
   theme: "light" as const,
   autoStart: false,
   alwaysOnTop: false,
+  // Closing the window tucks the app away in the tray. On by default, which is
+  // how the app has always behaved; turn it off to make the close button exit.
+  hideToTray: true,
   language: "en-US" as const,
   speed: 1.0,
 };

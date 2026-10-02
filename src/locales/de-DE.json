@@ -91,6 +91,7 @@
     "general": "Allgemein",
     "autoStart": "Autostart",
     "alwaysOnTop": "Immer im Vordergrund",
+    "hideToTray": "In den Infobereich minimieren",
     "language": "Sprache",
     "registerSuccess": "Kürzel \"{{shortcut}}\" registriert",
     "registerFail": "Kürzel \"{{shortcut}}\" fehlgeschlagen"

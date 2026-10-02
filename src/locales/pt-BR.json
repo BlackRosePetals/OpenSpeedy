@@ -89,6 +89,7 @@
     "general": "Geral",
     "autoStart": "Iniciar com o Sistema",
     "alwaysOnTop": "Sempre no Topo",
+    "hideToTray": "Ocultar na bandeja",
     "language": "Idioma",
     "registerSuccess": "Atalho \"{{shortcut}}\" registrado",
     "registerFail": "Falha ao registrar atalho \"{{shortcut}}\""

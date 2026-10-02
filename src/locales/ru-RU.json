@@ -89,6 +89,7 @@
     "general": "Общие",
     "autoStart": "Автозапуск",
     "alwaysOnTop": "Поверх всех окон",
+    "hideToTray": "Скрывать в трей",
     "language": "Язык",
     "registerSuccess": "Сочетание \"{{shortcut}}\" зарегистрировано",
     "registerFail": "Ошибка регистрации \"{{shortcut}}\""

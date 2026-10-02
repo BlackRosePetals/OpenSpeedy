@@ -89,6 +89,7 @@
     "general": "Algemeen",
     "autoStart": "Automatisch starten",
     "alwaysOnTop": "Altijd op voorgrond",
+    "hideToTray": "Verbergen in systeemvak",
     "language": "Taal",
     "registerSuccess": "Sneltoets \"{{shortcut}}\" geregistreerd",
     "registerFail": "Sneltoets \"{{shortcut}}\" registratie mislukt"

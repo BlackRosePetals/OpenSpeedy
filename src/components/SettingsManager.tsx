@@ -12,6 +12,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import LanguageIcon from "@mui/icons-material/Language";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import PushPinIcon from "@mui/icons-material/PushPin";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { invoke } from "@tauri-apps/api/core";
 import { enable, disable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { useSettings } from "../hooks/useSettings";
@@ -242,6 +243,11 @@ export default function SettingsManager() {
           <Switch checked={settings.alwaysOnTop as boolean} onChange={(_, v) => {
             set("alwaysOnTop", v);
             invoke("set_always_on_top", { onTop: v });
+          }} />
+        </Row>
+        <Row label={<Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}><ExitToAppIcon sx={{ fontSize: 16, color: "text.secondary" }} />{t("settings.hideToTray")}</Box>}>
+          <Switch checked={settings.hideToTray as boolean} onChange={(_, v) => {
+            set("hideToTray", v);
           }} />
         </Row>
         <Row label={<Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}><LanguageIcon sx={{ fontSize: 16, color: "text.secondary" }} />{t("settings.language")} / Language </Box>}>

@@ -91,6 +91,7 @@
     "general": "Général",
     "autoStart": "Démarrage Auto",
     "alwaysOnTop": "Toujours au premier plan",
+    "hideToTray": "Réduire dans la zone de notification",
     "language": "Langue",
     "registerSuccess": "Raccourci \"{{shortcut}}\" enregistré",
     "registerFail": "Échec de l'enregistrement de \"{{shortcut}}\""

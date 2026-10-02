@@ -55,7 +55,10 @@ export default function TitleBar({ osVer, cpuPct, memPct, gpuName, gpuUsedMb, gp
           <Box onClick={() => getCurrentWindow().toggleMaximize()}>
             <CropSquareIcon sx={{ fontSize: 14, color: "text.secondary" }} />
           </Box>
-          <Box onClick={() => getCurrentWindow().hide()} title="隐藏到托盘" sx={{ "&:hover": { bgcolor: "#C42B1C !important", "& .MuiSvgIcon-root": { color: "#fff" } } }}>
+          {/* `close()`, not `hide()`: it raises CloseRequested, which is where
+              the hide-to-tray setting is applied. Hiding directly here would
+              skip that decision entirely and make the setting do nothing. */}
+          <Box onClick={() => getCurrentWindow().close()} sx={{ "&:hover": { bgcolor: "#C42B1C !important", "& .MuiSvgIcon-root": { color: "#fff" } } }}>
             <CloseIcon sx={{ fontSize: 16, color: "text.secondary" }} />
           </Box>
         </Box>

@@ -88,6 +88,7 @@
     "general": "一般設定",
     "autoStart": "開機自動啟動",
     "alwaysOnTop": "視窗最上層",
+    "hideToTray": "隱藏系統匣",
     "language": "語言",
     "registerSuccess": "快速鍵 \"{{shortcut}}\" 註冊成功",
     "registerFail": "快速鍵 \"{{shortcut}}\" 註冊失敗"

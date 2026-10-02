@@ -89,6 +89,7 @@
     "general": "通用设置",
     "autoStart": "开机自启动",
     "alwaysOnTop": "窗口置顶",
+    "hideToTray": "隐藏托盘",
     "language": "语言",
     "registerSuccess": "快捷键 \"{{shortcut}}\" 注册成功",
     "registerFail": "快捷键 \"{{shortcut}}\" 注册失败"

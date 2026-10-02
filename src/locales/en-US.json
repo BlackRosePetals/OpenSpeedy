@@ -89,6 +89,7 @@
     "general": "General",
     "autoStart": "Auto Start",
     "alwaysOnTop": "Always on Top",
+    "hideToTray": "Hide to tray",
     "language": "Language",
     "registerSuccess": "Shortcut \"{{shortcut}}\" registered",
     "registerFail": "Shortcut \"{{shortcut}}\" registration failed"
