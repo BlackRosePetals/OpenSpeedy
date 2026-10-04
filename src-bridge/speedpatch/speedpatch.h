@@ -38,6 +38,10 @@ SPEEDPATCH_API void SP_Enable(DWORD processId);
 SPEEDPATCH_API void SP_Disable(DWORD processId);
 SPEEDPATCH_API void SP_SetSpeed(double factor_);
 SPEEDPATCH_API double SP_GetSpeed();
+// Number of time-API hooks this DLL failed to install. Shared across every
+// process mapping the DLL, so the bridge can read out failures recorded by the
+// copy injected into a game.
+SPEEDPATCH_API unsigned SP_GetHookFailures();
 }
 
 #endif // SPEEDPATCH_H

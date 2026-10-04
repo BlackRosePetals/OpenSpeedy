@@ -5,6 +5,13 @@ project(speedpatch LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# 静态链接 CRT（/MT）。默认的 /MD 会让 speedpatch*.dll 依赖 VCRUNTIME140.dll，
+# 那不是 Windows 组件、而是 VC++ 运行库的一部分 —— 目标机器没装时 DLL 根本加载
+# 不了，注入会静默失败。CMP0091（CMake 3.15+，这里要求 3.16）让该变量生效。
+if(MSVC)
+    set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+endif()
+
 # 判断 32 位还是 64 位
 if(CMAKE_SIZEOF_VOID_P EQUAL 8)
     set(ARCH_SUFFIX "64")

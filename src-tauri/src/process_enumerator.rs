@@ -472,6 +472,15 @@ fn icon_to_png_data(
         }
     };
 
+    // CreateDIBSection reports the pixel buffer through `bits`. A valid handle
+    // with a null pointer there would make the read-back below dereference
+    // address 0 — an access violation, which no panic hook can catch.
+    if bits.is_null() {
+        let _ = unsafe { DeleteObject(hbm) };
+        let _ = unsafe { DeleteDC(hdc_screen) };
+        return None;
+    }
+
     // Select the DIB into the DC and draw the icon onto it
     let old_bm = unsafe { SelectObject(hdc_screen, hbm) };
     if old_bm.is_invalid() {

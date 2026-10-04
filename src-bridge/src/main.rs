@@ -310,6 +310,21 @@ fn do_enable(pid: u32) -> Result<(), String> {
         eprintln!("[bridge] ENABLE GetProcAddress(SP_Enable) ok = {sp_enable:?}");
         sp_enable.ok_or("GetProcAddress SP_Enable failed")?(pid);
         eprintln!("[bridge] ENABLE SP_Enable({pid}) done");
+
+        // The DLL's hook-failure counter lives in a section shared between every
+        // process mapping it, so this read also surfaces failures recorded by the
+        // copy injected into the target — the difference between "speed control
+        // does nothing" and a game that crashes the moment it calls Sleep.
+        let failures: Option<unsafe extern "C" fn() -> u32> =
+            std::mem::transmute(GetProcAddress(h, s!("SP_GetHookFailures")));
+        if let Some(f) = failures {
+            let n = f();
+            if n > 0 {
+                eprintln!("[bridge] WARNING: {n} time-API hook(s) not installed — those APIs stay unpatched");
+            } else {
+                eprintln!("[bridge] all time-API hooks installed");
+            }
+        }
     }
     Ok(())
 }
