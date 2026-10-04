@@ -18,6 +18,7 @@ import { enable, disable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { useSettings } from "../hooks/useSettings";
 import { useShortcut } from "../hooks/useShortcut";
 import { useSnackbar } from "../contexts/SnackbarContext";
+import { reportError } from "../utils/frontendLog";
 import type { SettingsState } from "../store/settings";
 
 // ── Helpers ───────────────────────────────────────────────────────────────
@@ -39,8 +40,14 @@ export default function SettingsManager() {
   const { register, registerHold, unregister, shortcutStatus } = useShortcut();
   const { notify } = useSnackbar();
 
-  // Sync auto-start state from system on mount
-  useEffect(() => { isEnabled().then(v => set("autoStart", v)).catch(() => { }); }, []);
+  // Sync auto-start state from system on mount. Reported rather than swallowed:
+  // these three calls are gated by the capability file, so a missing permission
+  // fails here and the only symptom is a switch that does nothing.
+  useEffect(() => {
+    isEnabled()
+      .then(v => set("autoStart", v))
+      .catch(e => void reportError("autostart", "isEnabled failed", String(e)));
+  }, []);
 
   async function changeShortcut(key: keyof SettingsState, oldVal: string, newVal: string, cb: () => void) {
     if (oldVal) await unregister(oldVal).catch(() => { });
@@ -235,8 +242,14 @@ export default function SettingsManager() {
         {/* ── 通用设置 ── */}
         <Row label={<Box sx={{ display: "flex", alignItems: "center", gap: 0.5}}><PowerSettingsNewIcon sx={{ fontSize: 16, color: "text.secondary" }} />{t("settings.autoStart")}</Box>}>
           <Switch checked={settings.autoStart} onChange={async (_, v) => {
-            if (v) await enable(); else await disable();
-            set("autoStart", v);
+            try {
+              if (v) await enable(); else await disable();
+              set("autoStart", v);
+            } catch (e) {
+              // Leave the setting alone so the switch keeps showing what the
+              // system actually has, and say which call failed.
+              void reportError("autostart", v ? "enable failed" : "disable failed", String(e));
+            }
           }} />
         </Row>
         <Row label={<Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}><PushPinIcon sx={{ fontSize: 16, color: "text.secondary" }} />{t("settings.alwaysOnTop")}</Box>}>

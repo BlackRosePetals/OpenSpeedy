@@ -22,6 +22,7 @@
     "global-shortcut:allow-unregister",
     "global-shortcut:allow-unregister-all",
     "store:default",
+    "autostart:default",
     "shell:default",
     "shell:allow-open",
     "os:default",
